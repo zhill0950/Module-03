@@ -14,12 +14,10 @@ function collectEmployees() {
   }
 
   const lastName = prompt("Enter employees last name");
-  const salary = prompt("Enter employees salary");
+  const salary = parseFloat(prompt("Enter employees salary"));
 
   if (!isNaN(salary)) {
-    parseInt(salary);
-  } else {
-    alert("Error: Please try again");
+    alert("Please enter a valid number");
     collectEmployees();
     return;
   }
@@ -42,10 +40,10 @@ const displayAverageSalary = function (employeesArray) {
   // TODO: Calculate and display the average salary
   let totalSalary = 0;
   for (let i = 0; i < employeesArray.length; i++) {
-    totalSalary += employeesArray[i].salary;
+    totalSalary += parseFloat(employeesArray[i].salary);
   }
   const averageSalary = totalSalary / employeesArray.length;
-  alert(`The average salary is ${averageSalary}`);
+  alert(`The average salary is ${averageSalary.toFixed(2)}`);
 };
 
 // Select a random employee
@@ -60,7 +58,7 @@ const getRandomEmployee = function (employeesArray) {
   return randomEmployee;
 };
 
-addEmployeesBtn.onclick = collectEmployees;
+addEmployeesBtn.addEventListener("click", collectEmployees);
 
 /*
   ====================
