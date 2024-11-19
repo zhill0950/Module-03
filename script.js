@@ -5,34 +5,41 @@ const employeesArray = [];
 // Collect employee data
 function collectEmployees() {
   // TODO: Get user input to create and return an array of employee objects
+  while (true) {
+    const firstName = prompt("Enter employees first name");
+    if (firstName === null || firstName === "") {
+      break;
+    }
 
-  const firstName = prompt("Enter employees first name");
+    const lastName = prompt("Enter employees last name");
+    if (lastName === null || lastName === "") {
+      alert("Last name required");
+      continue;
+    }
 
-  if (firstName === null || firstName === "") {
-    displayEmployees(employeesArray);
-    return;
+    const salaryInput = prompt("Enter employees salary");
+    if (salaryInput === null) {
+      break;
+    }
+
+    const salary = parseFloat(salaryInput);
+    if (isNaN(salary) || salary <= 0) {
+      alert("Please enter a valid number");
+      continue;
+    }
+
+    employeesArray.push({
+      firstName: firstName,
+      lastName: lastName,
+      salary: salary,
+    });
+
+    const addEmployees = confirm("Would you like to add another employee?");
+    if (!addEmployees) {
+      break;
+    }
   }
-
-  const lastName = prompt("Enter employees last name");
-  const salary = parseFloat(prompt("Enter employees salary"));
-
-  if (!isNaN(salary)) {
-    alert("Please enter a valid number");
-    collectEmployees();
-    return;
-  }
-
-  employeesArray.push({
-    firstName: firstName,
-    lastName: lastName,
-    salary: salary,
-  });
-
-  const addEmployees = confirm("Would you like to add another employee?");
-  if (!addEmployees) {
-    displayEmployees(employeesArray);
-    return;
-  }
+  displayEmployees(employeesArray);
 }
 
 // Display the average salary
